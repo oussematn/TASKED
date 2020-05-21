@@ -20,17 +20,6 @@ class TaskController extends Controller
     }
 
     /**
-     * Show Task Dashboard
-     */
-    public function list()
-    {
-        // If we wanna return data without sorting
-        // 'tasks' => Task::all();
-        //return view('dashboard', ['tasks' => DB::table('tasks')->where('user_id', auth()->user()->id)->orderBy('created_at')->get()]);
-        return view('dashboard', ['categories' => DB::table('categories')->where('user_id', auth()->user()->id)->get()]);
-    }
-
-    /**
      * Add New Task
      */
     public function create()
@@ -76,5 +65,17 @@ class TaskController extends Controller
         //$task = Task::findOrFail($task);
         $task->delete();
         return redirect('/home');
+    }
+
+    /**
+     * Change Category
+     */
+
+    public function changeCat()
+    {
+        $task = Task::findOrFail(request('task'));
+        $task->category_id = request()->input('category');
+        $task->save();
+        return $task;
     }
 }

@@ -35,32 +35,30 @@
             </form>
         </div>
     </div>
-    <h3 class="mt-5">Tasks</h3>
 
-    <ul class="list-group list-group-flush">
-        {{-- @foreach ($tasks as $task)
-        <li class="list-group-item">
-            {{$task->name}}
-        <div class="float-right ml-2">
-            <form action="/tasks/{{$task->id}}" method="POST" name="delete_task">
-                @csrf
-                @method('DELETE')
-                <button type="submit" class="btn btn-danger"><i class="far fa-trash-alt"></i>
-                </button>
-            </form>
+    <div class="categories mt-5">
+        @foreach($categories as $category)
+        <div id="{{ $category->id}}" class="card" style="background: {{ $category->color }} !important">
+            <div class="card-header text-center">
+                {{ $category->name }}
+            </div>
+            <div class="card-body">
+                <ul class="list-group draggable">
+                    <li class="list-group-item intruder">
+                    </li>
+                    @foreach ($tasks as $task)
+                    @if ($task->category_id == $category->id)
+                    <li id="{{$task->id}}" class="list-group-item">
+                        {{ $task->name }}
+                    </li>
+                    @endif
+                    @endforeach
+                </ul>
+            </div>
         </div>
-        <div class="float-right">
-            <form action="/tasks/{{$task->id}}" method="POST" name="edit_task" class="edit-form">
-                @csrf
-                @method('PUT')
-                <input type="hidden" class="new_task_value" name="name">
-                <button type="submit" class="btn btn-warning"><i class="fas fa-pencil-alt"></i>
-                </button>
-            </form>
-        </div>
-        </li>
-        @endforeach --}}
-    </ul>
+        @endforeach
+    </div>
+
     <!-- Modal -->
     <div class="modal fade" id="addCategory" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
@@ -75,11 +73,24 @@
                 <div class="modal-body">
                     <form action="/categories" method="POST" class="add-category-form">
                         @csrf
-                        <h5>Category Name</h5>
+                        <h5>Category Name<span class="btn" data-toggle="tooltip" data-placement="right"
+                                title="Required">*</span>
+                        </h5>
                         <input name="name" type=text" class="form-control" id="name">
-                        @if ($errors->has('name'))
-                        <div class="alert alert-danger mt-2">{{$errors->first('name')}}</div>
-                        @endif
+                        <div class="alert alert-danger mt-2 d-none">Please choose a name!</div>
+                        <h5 class="mt-3">Color</h5>
+                        <div class="colors mb-3">
+                            <div class="circle btn" style="background: #fe4a49"></div>
+                            <div class="circle btn" style="background: #2ab7ca"></div>
+                            <div class="circle btn" style="background: #fed766"></div>
+                            <div class="circle btn" style="background: #e6e6ea"></div>
+                            <div class="circle btn" style="background: #96c582"></div>
+                            <div class="circle btn" style="background: #63ace5"></div>
+                            <div class="circle btn" style="background: #bcd6e7"></div>
+                            <div class="circle btn" style="background: #7c90c1"></div>
+                            <div class="circle btn" style="background: #f6abb6"></div>
+                        </div>
+                        <input id="color" type="hidden" name="color" value="#fff">
                     </form>
                 </div>
                 <div class="modal-footer">

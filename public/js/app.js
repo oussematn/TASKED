@@ -65852,24 +65852,73 @@ if (document.getElementById('example')) {
 /***/ (function(module, exports) {
 
 //! Category
+// faking submit
 document.querySelector('.submit-btn-category-fake').addEventListener('click', function () {
   document.querySelector('.add-category-form').submit();
-});
-var edit_forms = document.querySelectorAll('.edit-form');
+}); // category color
 
-var _loop = function _loop(i) {
-  edit_forms[i].addEventListener('submit', function (e) {
-    e.preventDefault();
-    var name = prompt('Edit task');
-    edit_forms[i].children[2].value = name;
-    console.log(edit_forms[i].children[2].value);
-    edit_forms[i].submit();
+var colors = document.querySelectorAll('.circle');
+
+for (var i = 0; i < colors.length; i++) {
+  var color = colors[i];
+  color.addEventListener('click', function (e) {
+    var selected = e.target;
+    document.querySelector('#color').value = selected.style.background;
+    selected.classList.add('selected-color');
+
+    for (var j = 0; j < colors.length; j++) {
+      if (colors[j] != e.target) {
+        colors[j].classList.remove('selected-color');
+      }
+    }
   });
-};
-
-for (var i = 0; i < edit_forms.length; i++) {
-  _loop(i);
 }
+/* let edit_forms = document.querySelectorAll('.edit-form');
+for (let i = 0; i < edit_forms.length; i++) {
+    edit_forms[i].addEventListener('submit', (e) => {
+        e.preventDefault();
+        let name = prompt('Edit task');
+        edit_forms[i].children[2].value = name;
+        console.log(edit_forms[i].children[2].value);
+        edit_forms[i].submit();
+    });
+} */
+
+
+var draggables = document.querySelectorAll('.draggable');
+var dragger = dragula({});
+
+for (var _i = 0; _i < draggables.length; _i++) {
+  dragger.containers.push(draggables[_i]);
+}
+
+dragger.on('drop', function (el, target, source, sibling) {
+  var task = el.id;
+  var cat = target.parentElement.parentElement.id;
+  /*  const form = document.querySelector('#change-cat-form');
+   const taskInput = document.querySelector('#task-input');
+   const category = document.querySelector('#category-input');
+   taskInput.value = task;
+   category.value = cat;
+   form.submit(); */
+
+  var formData = new FormData();
+  formData.append('task', '1');
+  formData.append('category', '2');
+  var data = {
+    task: task,
+    category: cat
+  };
+  fetch('/tasks/changecat', {
+    method: 'PATCH',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(data)
+  }).then(function (res) {
+    return console.log(res);
+  });
+});
 
 /***/ }),
 

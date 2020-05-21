@@ -22,14 +22,16 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/home', 'TaskController@list');
-Route::post('/tasks', 'TaskController@create');
-Route::put('/tasks/{task}', 'TaskController@edit');
-Route::delete('/tasks/{task}', 'TaskController@delete');
-
+Route::get('/home', 'CategoryController@list');
 Route::post('/categories', 'CategoryController@create');
 Route::put('/categories/{category}', 'CategoryController@edit');
 Route::delete('/categories/{category}', 'CategoryController@delete');
+
+
+Route::post('/tasks', 'TaskController@create');
+Route::put('/tasks/{task}', 'TaskController@edit');
+Route::delete('/tasks/{task}', 'TaskController@delete');
+Route::patch('/tasks/changecat', 'TaskController@changeCat');
 
 Auth::routes(['verify' => true]);
 Route::get('/send-mail', function () {
