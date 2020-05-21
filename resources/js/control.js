@@ -59,3 +59,59 @@ dragger.on('drop', (el, target, source, sibling) => {
         body: JSON.stringify(data),
     }).then(res => console.log(res))
 });
+
+//! Deleting tasks
+const trashs = document.querySelectorAll('.fa-trash-alt');
+for (let i = 0; i < trashs.length; i++) {
+    trashs[i].addEventListener('click', e => {
+        const id = e.target.parentElement.parentElement.id;
+        fetch(`/tasks/${id}`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        }).then(res => {
+            console.log(res);
+            e.target.parentElement.parentElement.style.display = 'none'
+        })
+    })
+}
+
+//! Editing tasks
+const edits = document.querySelectorAll('.fa-edit');
+for (let i = 0; i < edits.length; i++) {
+    edits[i].addEventListener('click', e => {
+        const id = e.target.parentElement.parentElement.id;
+        const name = prompt('Edit Task');
+        fetch(`/tasks/${id}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ name: name })
+        }).then(res => {
+            console.log(res);
+            e.target.parentElement.parentElement.children[0].innerHTML = name;
+        })
+    })
+}
+
+//! Deleting category
+
+const cross_icons = document.querySelectorAll('.fa-times-circle');
+for (let i = 0; i < cross_icons.length; i++) {
+    cross_icons[i].addEventListener('click', e => {
+        if (confirm('Are you sure you want to delete this category?')) {
+            const id = e.target.parentElement.parentElement.id;
+            fetch(`/categories/${id}`, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json',
+                }
+            }).then(res => {
+                console.log(res);
+                e.target.parentElement.parentElement.style.display = 'none'
+            })
+        }
+    })
+}

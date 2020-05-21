@@ -54,6 +54,6 @@ class CategoryController extends Controller
     {
         //$Category = Category::findOrFail($Category);
         $category->delete();
-        return redirect('/home');
+        return;
     }
 }

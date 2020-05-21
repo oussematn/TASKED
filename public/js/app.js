@@ -65918,7 +65918,66 @@ dragger.on('drop', function (el, target, source, sibling) {
   }).then(function (res) {
     return console.log(res);
   });
-});
+}); //! Deleting tasks
+
+var trashs = document.querySelectorAll('.fa-trash-alt');
+
+for (var _i2 = 0; _i2 < trashs.length; _i2++) {
+  trashs[_i2].addEventListener('click', function (e) {
+    var id = e.target.parentElement.parentElement.id;
+    fetch("/tasks/".concat(id), {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    }).then(function (res) {
+      console.log(res);
+      e.target.parentElement.parentElement.style.display = 'none';
+    });
+  });
+} //! Editing tasks
+
+
+var edits = document.querySelectorAll('.fa-edit');
+
+for (var _i3 = 0; _i3 < edits.length; _i3++) {
+  edits[_i3].addEventListener('click', function (e) {
+    var id = e.target.parentElement.parentElement.id;
+    var name = prompt('Edit Task');
+    fetch("/tasks/".concat(id), {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        name: name
+      })
+    }).then(function (res) {
+      console.log(res);
+      e.target.parentElement.parentElement.children[0].innerHTML = name;
+    });
+  });
+} //! Deleting category
+
+
+var cross_icons = document.querySelectorAll('.fa-times-circle');
+
+for (var _i4 = 0; _i4 < cross_icons.length; _i4++) {
+  cross_icons[_i4].addEventListener('click', function (e) {
+    if (confirm('Are you sure you want to delete this category?')) {
+      var id = e.target.parentElement.parentElement.id;
+      fetch("/categories/".concat(id), {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      }).then(function (res) {
+        console.log(res);
+        e.target.parentElement.parentElement.style.display = 'none';
+      });
+    }
+  });
+}
 
 /***/ }),
 

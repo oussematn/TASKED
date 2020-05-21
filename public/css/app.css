@@ -11030,3 +11030,33 @@ span.btn {
   margin-left: -5px !important;
 }
 
+.fa-trash-alt {
+  background-color: #f3f3f3;
+  border-radius: 5px;
+  transform: scale(1.5);
+  padding: 5px;
+  margin-top: 2px;
+  color: #ca0d0d;
+  margin-left: 20px;
+}
+
+.fa-edit {
+  background-color: #f3f3f3;
+  border-radius: 5px;
+  transform: scale(1.5);
+  padding: 5px;
+  margin-top: 2px;
+  color: #f5a42b;
+  margin-left: 4.5px;
+}
+
+.fa-times-circle {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: -3px -2px 0 0;
+  transform: scale(0.8);
+  cursor: pointer;
+  color: #4b4a4a;
+}
+

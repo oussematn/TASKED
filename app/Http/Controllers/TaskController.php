@@ -29,7 +29,7 @@ class TaskController extends Controller
             'name' => 'required|max:255',
         ]);
         $task = new Task();
-        $task->name = request('name');
+        $task->name = ucfirst(request('name'));
         $task->user_id =  auth()->user()->id;
         $task->category_id =  request('category');
         $task->save();
@@ -51,10 +51,12 @@ class TaskController extends Controller
         /* $task->name = request('name');
         $task->save();
         */
-        $task->update(request()->validate([
+        $validator = request()->validate([
             'name' => 'required|max:255',
-        ]));
-        return redirect('/home');
+        ]);
+        $new = ucfirst(request('name'));
+        $task->update(['name' => $new]);
+        return;
     }
 
     /**
@@ -64,7 +66,7 @@ class TaskController extends Controller
     {
         //$task = Task::findOrFail($task);
         $task->delete();
-        return redirect('/home');
+        return;
     }
 
     /**

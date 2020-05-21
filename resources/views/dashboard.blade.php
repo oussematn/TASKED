@@ -5,9 +5,8 @@
 @section('content')
 <div class="container">
     <div class="card mt-3">
-        <div class="card-header">Add New Task</div>
         <div class="card-body">
-            <h5 class="card-title">Task</h5>
+            <h5 class="card-title">New Task</h5>
             <form action="/tasks" method="POST">
                 @csrf
                 <input name="name" type=text" class="form-control" id="name">
@@ -40,6 +39,7 @@
         @foreach($categories as $category)
         <div id="{{ $category->id}}" class="card" style="background: {{ $category->color }} !important">
             <div class="card-header text-center">
+                <i class="far fa-times-circle"></i>
                 {{ $category->name }}
             </div>
             <div class="card-body">
@@ -49,7 +49,11 @@
                     @foreach ($tasks as $task)
                     @if ($task->category_id == $category->id)
                     <li id="{{$task->id}}" class="list-group-item">
-                        {{ $task->name }}
+                        <span>{{ $task->name }}</span>
+                        <div class="controllers mt-2">
+                            <i class="far fa-edit"></i>
+                            <i class="far fa-trash-alt"></i>
+                        </div>
                     </li>
                     @endif
                     @endforeach

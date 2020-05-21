@@ -65,3 +65,33 @@ span.btn {
     color: red !important;
     margin-left: -5px !important;
 }
+
+@mixin icon-control {
+    background-color: rgb(243, 243, 243);
+    border-radius: 5px;
+    transform: scale(1.5);
+    padding: 5px;
+    margin-top: 2px;
+}
+
+.fa-trash-alt {
+    @include icon-control();
+    color: rgb(202, 13, 13);
+    margin-left: 20px;
+}
+
+.fa-edit {
+    @include icon-control();
+    color: rgb(245, 164, 43);
+    margin-left: 4.5px;
+}
+
+.fa-times-circle {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: -3px -2px 0 0;
+    transform: scale(0.8);
+    cursor: pointer;
+    color: rgb(75, 74, 74);
+}
