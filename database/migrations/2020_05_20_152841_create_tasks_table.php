@@ -23,6 +23,7 @@ class CreateTasksTable extends Migration
                 ->references('id')
                 ->on('users')
                 ->onDelete('cascade');
+
             $table->foreignId('category_id')
                 ->references('id')
                 ->on('categories')
