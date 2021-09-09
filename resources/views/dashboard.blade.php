@@ -6,7 +6,7 @@
 <div class="container">
     <div class="card mt-3">
         <div class="card-body">
-            <h5 class="card-title">New Task</h5>
+            <h5 class="card-title">If you want to add a task baby, here's the palce &#128525;</h5>
             <form action="/tasks" method="POST">
                 @csrf
                 <input name="name" type=text" class="form-control" id="name">
@@ -64,8 +64,7 @@
     </div>
 
     <!-- Modal -->
-    <div class="modal fade" id="addCategory" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
+    <div class="modal fade" id="addCategory" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -77,8 +76,7 @@
                 <div class="modal-body">
                     <form action="/categories" method="POST" class="add-category-form">
                         @csrf
-                        <h5>Category Name<span class="btn" data-toggle="tooltip" data-placement="right"
-                                title="Required">*</span>
+                        <h5>Category Name<span class="btn" data-toggle="tooltip" data-placement="right" title="Required">*</span>
                         </h5>
                         <input name="name" type=text" class="form-control" id="name">
                         <div class="alert alert-danger mt-2 d-none">Please choose a name!</div>

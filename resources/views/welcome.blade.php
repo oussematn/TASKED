@@ -5,10 +5,16 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>TASKED</title>
+    <title>JULI TASKS</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="192x192" href="{{ asset('images/android-icon-192x192.png') }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('images/favicon-32x32.png') }}">
+    <link rel="icon" type="image/png" sizes="96x96" href="{{ asset('images/favicon-96x96.png') }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('images/favicon-16x16.png') }}">
+
     <!-- Styles -->
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
 
@@ -16,7 +22,10 @@
     <style>
         html,
         body {
-            background-color: #fff;
+            background-image: url("{{ asset('images/23417.jpg') }}");
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
             color: #636b6f;
             font-family: 'Nunito', sans-serif;
             font-weight: 200;
@@ -68,15 +77,14 @@
         }
 
         .content {
-            margin-top: 23vh;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            grid-gap: 5vw;
-            margin-left: 9vw;
+            margin-top: 10vh;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
         }
 
         .welcome {
-            margin-top: 5vh;
+            opacity: 0;
         }
 
         .blabla {
@@ -84,17 +92,12 @@
         }
 
         .image img {
-            margin-top: -10vh;
             height: 60vh;
         }
 
-        .display-1 {
-            color: #7DB5DB;
-        }
-
-        @media only screen and (max-width :1000px) {
+        @media screen and (max-width: 700px) {
             .content {
-                margin-left: 0;
+                flex-direction: column;
             }
         }
     </style>
@@ -108,27 +111,23 @@
             <a href="{{ url('/home') }}">Home</a>
             @else
             <a href="{{ route('login') }}">Login</a>
-
-            @if (Route::has('register'))
-            <a href="{{ route('register') }}">Register</a>
-            @endif
             @endauth
         </div>
         @endif
     </div>
-    <div class="container content">
-        <div class="welcome">
-            <h1 class="display-1">
-                Tasked
-            </h1>
-            <div class="blabla">
-                <span>Keep yourself organized!</span>
-                <br>
-                <span>Manage Less. Do More.</span>
+    <div class="container">
+        <div class="content">
+            <div class="welcome">
+                <h1>
+                    Juli Tasks
+                </h1>
+                <div class="blabla">
+                    An app for my love Juli to help her organize herself
+                </div>
             </div>
-        </div>
-        <div class="image">
-            <img src="{{ asset('images/illust.png') }}" alt="Tasked">
+            <div class="image">
+                <img src="{{ asset('images/illust.png') }}" alt="Tasked">
+            </div>
         </div>
     </div>
 </body>
